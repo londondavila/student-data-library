@@ -77,14 +77,14 @@ int* Student::getCourseDays()
 
 void Student::print()
 {
-	cout << left << setw(5) << studentID;
-	cout << left << setw(45) << firstName;
-	cout << left << setw(20) << lastName;
-	cout << left << setw(20) << emailAddress;
-	cout << left << setw(20) << age;
-	cout << left << setw(10) << daysOfCourse[0];
-	cout << left << setw(10) << daysOfCourse[1];
-	cout << left << setw(10) << daysOfCourse[2];
+	cout << "Student ID: " << studentID << "\t";
+	cout << "Last Name: " << lastName << "\t";
+	cout << "Email Address: " << emailAddress << "\t";
+	cout << "Age: " << age << "\t Days In Course: {";
+	cout << daysOfCourse[0] << ", ";
+	cout << daysOfCourse[1] << ", ";
+	cout << daysOfCourse[2] << "} ";
+	cout << "Degree Program: " << degreeType << "\t";
 }
 
 Student::~Student()

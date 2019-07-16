@@ -27,6 +27,7 @@ public:
 	void remove(string studentID);
 	void printAll();
 	void printInvalidEmails();
+	void printDaysInCourse(string studentID);
 	void printByDegreeProgram(Degree d);
 
 	~Roster();

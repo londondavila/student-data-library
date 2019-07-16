@@ -37,7 +37,7 @@ void Roster::parse(string row)
 		}
 		else
 		{
-			cerr << "ERROR.\n";
+			cerr << "ERROR. STUDENT TYPE BROKE.\n";
 			exit(-1);
 		}
 
@@ -109,9 +109,21 @@ void Roster::remove(string studentID)
 
 void Roster::printByDegreeProgram(Degree d)
 {
-	cout << "Printing by degree program: \n ";
+	cout << "Printing by degree program:\n";
 	for (int i = 0; i <= lastIndex; i++) {
 		if (this->classRosterArray[i]->getDegreeProgram() == d) this->classRosterArray[i]->print();
+	}
+}
+
+void Roster::printDaysInCourse(string studentID)
+{
+	for (int i = 0; i <= lastIndex; i++)
+	{
+		if (this->classRosterArray[i]->getID() == studentID)
+		{
+			int* avgDays = classRosterArray[i]->getCourseDays();
+			cout << "Average days in course " << studentID << " are " << (avgDays[0] + avgDays[1] + avgDays[2]) / 3 << endl;
+		}
 	}
 }
 
@@ -152,6 +164,16 @@ int main()
 	cout << "Printing students." << endl;
 	dynamicRoster->printAll();
 
+	//cout << "Printing invalid student emails:\n";
+	//dynamicRoster->printInvalidEmails();
+
+	//cout << "Printing average days in course for student A2:\n";
+	//dynamicRoster->printDaysInCourse("A2");
+	
+	//dynamicRoster->printByDegreeProgram(SECURITY);
+	//dynamicRoster->printByDegreeProgram(SOFTWARE);
+	//dynamicRoster->printByDegreeProgram(NETWORKING);
+
 	/*cout << "Removing A3:\n";
 	if (dynamicRoster->remove("A3")) dynamicRoster->printAll();
 	else cout << "Student not found!\n";
@@ -159,12 +181,6 @@ int main()
 	cout << "Removing A3:\n";
 	if (dynamicRoster->remove("A3")) dynamicRoster->printAll();
 	else cout << "Student not found!\n"; */
-
-	//dynamicRoster->printByDegreeProgram(SECURITY);
-	//dynamicRoster->printByDegreeProgram(SOFTWARE);
-	//dynamicRoster->printByDegreeProgram(NETWORKING);
-
-	//dynamicRoster->printInvalidEmails();
 
 	return 0;
 }
