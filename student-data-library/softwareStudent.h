@@ -18,5 +18,5 @@ public:
 	void setDegreeType(Degree d);
 	void print();
 
-	~SoftwareStudent();
+	~SoftwareStudent(); // call superdestructor
 };
