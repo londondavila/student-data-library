@@ -16,11 +16,11 @@ class Roster
 {
 public:
 	Roster();
-	// Roster(int maxSize);
+	Roster(int maxSize);
 
 	void parse(string row);
 	void add(string studentID, string firstName, string lastName, string emailAddress, string age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeType);
-	void remove(string studentID);
+	bool remove(string studentID);
 	void printAll();
 	void printInvalidEmails();
 	void printDaysInCourse(string studentID);
@@ -30,6 +30,6 @@ public:
 
 private:
 	int lastIndex;
-	Student* classRosterArray[numStudents]; // originally Student** classRosterArray for dynamic
-	// int maxSize; // ONLY NEEDED FOR DYNAMIC ALLOCATION
+	Student** classRosterArray; // originally Student** classRosterArray for dynamic
+	int maxSize; // ONLY NEEDED FOR DYNAMIC ALLOCATION
 };

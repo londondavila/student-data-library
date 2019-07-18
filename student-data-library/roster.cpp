@@ -5,16 +5,16 @@
 
 Roster::Roster()
 {
-	// this->maxSize = 0;
+	this->maxSize = 0;
 	this->lastIndex = -1; // setting to empty
-	// this->classRosterArray = nullptr;
+	this->classRosterArray = nullptr;
 }
-/*Roster::Roster(int maxSize)
+Roster::Roster(int maxSize)
 {
 	this->maxSize = maxSize;
 	this->lastIndex = -1;
 	this->classRosterArray = new Student*[maxSize];
-} */
+}
 void Roster::parse(string row)
 {
 	if (lastIndex < maxSize) {
@@ -45,7 +45,7 @@ void Roster::parse(string row)
 		classRosterArray[lastIndex]->setStudentID(studentData[lastIndex].substr(0, rightParse));
 		
 		int leftParse = rightParse + 1;
-		rightParse = studentData[lastIndex].find(".", leftParse);
+		rightParse = studentData[lastIndex].find(",", leftParse);
 		classRosterArray[lastIndex]->setFirstName(studentData[lastIndex].substr(leftParse, rightParse - leftParse));
 
 		leftParse = rightParse + 1;
@@ -96,22 +96,25 @@ void Roster::printAll()
 	for (int i = 0; i <= this->lastIndex; i++) (this->classRosterArray)[i]->print();
 }
 
-void Roster::remove(string studentID)
+bool Roster::remove(string studentID)
 {
+	bool exists = false;
 	for (int i = 0; i <= lastIndex; i++)
 	{
 		if (this->classRosterArray[i]->getID() == studentID)
 		{
+			exists = true;
 			delete this->classRosterArray[i];
 			this->classRosterArray[i] = this->classRosterArray[lastIndex];
 			lastIndex--;
 		}
 	}
+	return exists;
 }
 
 void Roster::printByDegreeProgram(Degree d)
 {
-	//cout << "Printing by degree program:\n";
+	cout << "Printing by degree program:\n";
 	for (int i = 0; i <= lastIndex; i++) {
 		if (this->classRosterArray[i]->getDegreeProgram() == d) this->classRosterArray[i]->print();
 	}
@@ -128,7 +131,7 @@ void Roster::printDaysInCourse(string studentID)
 		}
 		else
 		{
-			cout << "Course not found.\n";
+			//cout << "Course not found.\n";
 		}
 	}
 }
@@ -140,18 +143,17 @@ void Roster::printInvalidEmails()
 		string emailCheck = classRosterArray[i]->getEmail();
 		if (emailCheck.find(".") == string::npos ||
 			emailCheck.find("@") == string::npos ||
-			emailCheck.find(" ") != string::npos) cout << emailCheck << " is an invalid email." << endl;
+			emailCheck.find(" ") != string::npos) cout << emailCheck << " is an invalid email.\n" << endl;
 	}
 }
 
 Roster::~Roster()
 {
-	/*for (int i = 0; i < numStudents; i++)
+	for (int i = 0; i < numStudents; i++)
 	{
 		delete this->classRosterArray[i];
 	}
-	delete this; */ // dynamic destructor
-	delete classRosterArray;
+	delete this; // dynamic destructor
 }
 
 int main()
@@ -159,45 +161,39 @@ int main()
 	cout << "C867 - Scripting and Programming Applications\n";
 	cout << "C++\n";
 	cout << "00081497\n";
-	cout << "London Davila\n";
+	cout << "London Davila\n" << endl;
 
-	/*Roster * classRoster = new Roster(numStudents);
+	Roster * classRoster = new Roster(numStudents);
 	cout << "Parsing data and adding students:\n";
 	for (int i = 0; i < numStudents; i++)
 	{
 		classRoster->parse(studentData[i]);
-	} */
-
-	Roster classRoster;
-
-	cout << "Parsing student data, adding students to roster.\n";
-	for (int i = 0; i < numStudents; i++)
-	{
-		classRoster.parse(studentData[i]);
 	}
+
 	cout << "Data parsed.\n";
 	
-	cout << "Printing all students." << endl;
-	classRoster.printAll();
+	cout << "Printing all students.\n" << endl;
+	classRoster->printAll();
 
-	//cout << "Printing invalid student emails:\n";
-	//classRoster->printInvalidEmails();
+	cout << "Printing invalid student emails:\n";
+	classRoster->printInvalidEmails();
 
-	//cout << "Printing average days in course for student A2:\n";
-	//classRoster->printDaysInCourse("A2");
+	cout << "Printing average days in course for student A2:\n" << endl;
+	classRoster->printDaysInCourse("A2");
 	
-	//classRoster->printByDegreeProgram(SECURITY);
-	//cout << "Printing students in the Software Program.\n;
+	cout << "Printing students in the Software Program.\n";
+	classRoster->printByDegreeProgram(SOFTWARE);
+	
 	//classRoster->printByDegreeProgram(SOFTWARE);
 	//classRoster->printByDegreeProgram(NETWORKING);
 
-	/*cout << "Removing student A3:\n";
-	if (classRoster->remove("A3")) dynamicRoster->printAll();
-	else cout << "STUDENT NOT FOUND\n";
+	cout << "Removing student A3:\n";
+	if (classRoster->remove("A3")) classRoster->printAll();
+	else cout << "COULD NOT REMOVE, STUDENT NOT FOUND.\n";
 
 	cout << "Removing student A3:\n";
-	if (classRoster->remove("A3")) dynamicRoster->printAll();
-	else cout << "STUDENT NOT FOUND\n"; */
+	if (classRoster->remove("A3")) classRoster->printAll();
+	else cout << "COULD NOT REMOVE, STUDENT NOT FOUND.\n";
 
 	return 0;
 }
