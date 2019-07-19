@@ -77,6 +77,7 @@ int* Student::getCourseDays()
 void Student::print()
 {
 	cout << "Student ID: " << studentID << "\t";
+	cout << "First Name: " << firstName << "\t";
 	cout << "Last Name: " << lastName << "\t";
 	cout << "Email Address: " << emailAddress << "\t";
 	cout << "Age: " << age << "\t Days In Course: {";

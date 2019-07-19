@@ -6,75 +6,75 @@
 Roster::Roster()
 {
 	this->maxSize = 0;
-	this->lastIndex = -1; // setting to empty
+	this->index = -1; // setting to empty
 	this->classRosterArray = nullptr;
 }
 Roster::Roster(int maxSize)
 {
 	this->maxSize = maxSize;
-	this->lastIndex = -1;
+	this->index = -1;
 	this->classRosterArray = new Student*[maxSize];
 }
 void Roster::parse(string row)
 {
-	if (lastIndex < maxSize) {
-		lastIndex++; // start at 0
+	if (index < maxSize) {
+		index++; // start at 0
 		int tempArrayDays[Student::daysArraySize];
 		if (row.back() == 'E')
 		{
-			this->classRosterArray[lastIndex] = new SoftwareStudent();
-			classRosterArray[lastIndex]->setDegreeType(SOFTWARE);
+			this->classRosterArray[index] = new SoftwareStudent();
+			classRosterArray[index]->setDegreeType(SOFTWARE);
 		}
 		else if (row.back() == 'Y')
 		{
-			this->classRosterArray[lastIndex] = new SecurityStudent();
-			classRosterArray[lastIndex]->setDegreeType(SECURITY);
+			this->classRosterArray[index] = new SecurityStudent();
+			classRosterArray[index]->setDegreeType(SECURITY);
 		}
 		else if (row.back() == 'G')
 		{
-			this->classRosterArray[lastIndex] = new NetworkStudent();
-			classRosterArray[lastIndex]->setDegreeType(NETWORKING);
+			this->classRosterArray[index] = new NetworkStudent();
+			classRosterArray[index]->setDegreeType(NETWORKING);
 		}
 		else
 		{
-			cerr << "ERROR. STUDENT TYPE BROKEN.\n";
+			cerr << "ERROR: STUDENT TYPE BROKEN.\n";
 			exit(-1);
 		}
 
-		int rightParse = studentData[lastIndex].find(",");
-		classRosterArray[lastIndex]->setStudentID(studentData[lastIndex].substr(0, rightParse));
+		int rightParse = studentData[index].find(",");
+		classRosterArray[index]->setStudentID(studentData[index].substr(0, rightParse));
 		
 		int leftParse = rightParse + 1;
-		rightParse = studentData[lastIndex].find(",", leftParse);
-		classRosterArray[lastIndex]->setFirstName(studentData[lastIndex].substr(leftParse, rightParse - leftParse));
+		rightParse = studentData[index].find(",", leftParse);
+		classRosterArray[index]->setFirstName(studentData[index].substr(leftParse, rightParse - leftParse));
 
 		leftParse = rightParse + 1;
-		rightParse = studentData[lastIndex].find(",", leftParse);
-		classRosterArray[lastIndex]->setLastName(studentData[lastIndex].substr(leftParse, rightParse - leftParse));
+		rightParse = studentData[index].find(",", leftParse);
+		classRosterArray[index]->setLastName(studentData[index].substr(leftParse, rightParse - leftParse));
 
 		leftParse = rightParse + 1;
-		rightParse = studentData[lastIndex].find(",", leftParse);
-		classRosterArray[lastIndex]->setEmail(studentData[lastIndex].substr(leftParse, rightParse - leftParse));
+		rightParse = studentData[index].find(",", leftParse);
+		classRosterArray[index]->setEmail(studentData[index].substr(leftParse, rightParse - leftParse));
 
 		leftParse = rightParse + 1;
-		rightParse = studentData[lastIndex].find(",", leftParse);
-		classRosterArray[lastIndex]->setAge(studentData[lastIndex].substr(leftParse, rightParse - leftParse));
+		rightParse = studentData[index].find(",", leftParse);
+		classRosterArray[index]->setAge(studentData[index].substr(leftParse, rightParse - leftParse));
 
 		// DAYS IN COURSE
 
 		leftParse = rightParse + 1;
-		rightParse = studentData[lastIndex].find(",", leftParse);
-		tempArrayDays[0] = stoi(studentData[lastIndex].substr(leftParse, rightParse - leftParse));
+		rightParse = studentData[index].find(",", leftParse);
+		tempArrayDays[0] = stoi(studentData[index].substr(leftParse, rightParse - leftParse));
 
 		leftParse = rightParse + 1;
-		rightParse = studentData[lastIndex].find(",", leftParse);
-		tempArrayDays[1] = stoi(studentData[lastIndex].substr(leftParse, rightParse - leftParse));
+		rightParse = studentData[index].find(",", leftParse);
+		tempArrayDays[1] = stoi(studentData[index].substr(leftParse, rightParse - leftParse));
 
 		leftParse = rightParse + 1;
-		rightParse = studentData[lastIndex].find(",", leftParse);
-		tempArrayDays[2] = stoi(studentData[lastIndex].substr(leftParse, rightParse - leftParse));
+		rightParse = studentData[index].find(",", leftParse);
+		tempArrayDays[2] = stoi(studentData[index].substr(leftParse, rightParse - leftParse));
 
-		classRosterArray[lastIndex]->setDaysOfCourse(tempArrayDays);
+		classRosterArray[index]->setDaysOfCourse(tempArrayDays);
 	}
 	else
 	{
@@ -93,20 +93,20 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 
 void Roster::printAll()
 {
-	for (int i = 0; i <= this->lastIndex; i++) (this->classRosterArray)[i]->print();
+	for (int i = 0; i <= this->index; i++) (this->classRosterArray)[i]->print();
 }
 
 bool Roster::remove(string studentID)
 {
 	bool exists = false;
-	for (int i = 0; i <= lastIndex; i++)
+	for (int i = 0; i <= index; i++)
 	{
 		if (this->classRosterArray[i]->getID() == studentID)
 		{
 			exists = true;
 			delete this->classRosterArray[i];
-			this->classRosterArray[i] = this->classRosterArray[lastIndex];
-			lastIndex--;
+			this->classRosterArray[i] = this->classRosterArray[index];
+			index--;
 		}
 	}
 	return exists;
@@ -114,20 +114,20 @@ bool Roster::remove(string studentID)
 
 void Roster::printByDegreeProgram(Degree d)
 {
-	cout << "Printing by degree program:\n";
-	for (int i = 0; i <= lastIndex; i++) {
+	//cout << "Printing by degree program:\n";
+	for (int i = 0; i <= index; i++) {
 		if (this->classRosterArray[i]->getDegreeProgram() == d) this->classRosterArray[i]->print();
 	}
 }
 
 void Roster::printDaysInCourse(string studentID)
 {
-	for (int i = 0; i <= lastIndex; i++)
+	for (int i = 0; i <= index; i++)
 	{
 		if (this->classRosterArray[i]->getID() == studentID)
 		{
 			int* avgDays = classRosterArray[i]->getCourseDays();
-			cout << "Average days in course " << studentID << " are " << (avgDays[0] + avgDays[1] + avgDays[2]) / 3 << endl;
+			cout << "\nAverage days of courses for student " << studentID << " is " << (avgDays[0] + avgDays[1] + avgDays[2]) / 3 << " days." << endl;
 		}
 		else
 		{
@@ -138,12 +138,12 @@ void Roster::printDaysInCourse(string studentID)
 
 void Roster::printInvalidEmails()
 {
-	for (int i = 0; i <= lastIndex; i++)
+	for (int i = 0; i <= index; i++)
 	{
 		string emailCheck = classRosterArray[i]->getEmail();
 		if (emailCheck.find(".") == string::npos ||
 			emailCheck.find("@") == string::npos ||
-			emailCheck.find(" ") != string::npos) cout << emailCheck << " is an invalid email.\n" << endl;
+			emailCheck.find(" ") != string::npos) cout << emailCheck << " is an invalid email." << endl;
 	}
 }
 
@@ -158,42 +158,35 @@ Roster::~Roster()
 
 int main()
 {
-	cout << "C867 - Scripting and Programming Applications\n";
-	cout << "C++\n";
-	cout << "00081497\n";
-	cout << "London Davila\n" << endl;
-
 	Roster * classRoster = new Roster(numStudents);
-	cout << "Parsing data and adding students:\n";
+
+	cout << "\nParsing data and adding students:\n";
 	for (int i = 0; i < numStudents; i++)
 	{
 		classRoster->parse(studentData[i]);
 	}
 
-	cout << "Data parsed.\n";
+	cout << "\nData parsed.\n";
 	
-	cout << "Printing all students.\n" << endl;
+	cout << "\nPrinting all students.\n" << endl;
 	classRoster->printAll();
 
-	cout << "Printing invalid student emails:\n";
+	cout << "\nPrinting invalid student emails:\n" << endl;
 	classRoster->printInvalidEmails();
 
-	cout << "Printing average days in course for student A2:\n" << endl;
+	cout << "\nPrinting average days in course for student A2:\n";
 	classRoster->printDaysInCourse("A2");
 	
-	cout << "Printing students in the Software Program.\n";
+	cout << "\nPrinting students in the Software Program.\n" << endl;
 	classRoster->printByDegreeProgram(SOFTWARE);
-	
-	//classRoster->printByDegreeProgram(SOFTWARE);
-	//classRoster->printByDegreeProgram(NETWORKING);
 
-	cout << "Removing student A3:\n";
+	cout << "\nRemoving student A3:\n\n";
 	if (classRoster->remove("A3")) classRoster->printAll();
-	else cout << "COULD NOT REMOVE, STUDENT NOT FOUND.\n";
+	else cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
 
-	cout << "Removing student A3:\n";
+	cout << "\nRemoving student A3:\n\n";
 	if (classRoster->remove("A3")) classRoster->printAll();
-	else cout << "COULD NOT REMOVE, STUDENT NOT FOUND.\n";
+	else cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
 
 	return 0;
 }

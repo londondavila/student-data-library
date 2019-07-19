@@ -29,7 +29,7 @@ public:
 	~Roster();
 
 private:
-	int lastIndex;
+	int index;
 	Student** classRosterArray; // originally Student** classRosterArray for dynamic
 	int maxSize; // ONLY NEEDED FOR DYNAMIC ALLOCATION
 };
