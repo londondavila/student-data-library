@@ -156,11 +156,13 @@ Roster::~Roster()
 	delete this; // dynamic destructor
 }
 
-int main()
+auto main() -> int
 {
 	Roster * classRoster = new Roster(numStudents);
 
 	cout << "\nParsing data and adding students:\n";
+	
+	#pragma unroll
 	for (int i = 0; i < numStudents; i++)
 	{
 		classRoster->parse(studentData[i]);
@@ -181,12 +183,18 @@ int main()
 	classRoster->printByDegreeProgram(SOFTWARE);
 
 	cout << "\nRemoving student A3:\n\n";
-	if (classRoster->remove("A3")) classRoster->printAll();
-	else cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
+	if (classRoster->remove("A3")) {
+		classRoster->printAll();
+	} else {
+		cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
+	}
 
 	cout << "\nRemoving student A3:\n\n";
-	if (classRoster->remove("A3")) classRoster->printAll();
-	else cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
+	if (classRoster->remove("A3")) {
+		classRoster->printAll();
+	} else {
+		cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
+	}
 
 	return 0;
 }
