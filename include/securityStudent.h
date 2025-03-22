@@ -3,13 +3,16 @@
 
 class SecurityStudent : public Student {
 public:
+  // constructor
   SecurityStudent();
-  SecurityStudent(string StudentID, string firstName, string lastName,
-                  string emailAddress, string age, int *daysOfCourse,
-                  Degree dType);
+  // parameterized constructor
+  SecurityStudent(std::string StudentID, std::string firstName,
+                  std::string lastName, std::string emailAddress,
+                  std::string age, int *daysOfCourse, Degree dType);
   Degree getDegreeProgram();
   void setDegreeType(Degree d);
   void print();
 
-  ~SecurityStudent(); // call superdestructor
+  // superdestructor
+  ~SecurityStudent();
 };

@@ -1,4 +1,5 @@
 #include "student.h"
+#include <iostream>
 
 Student::Student() {
   this->studentID = "";
@@ -11,8 +12,9 @@ Student::Student() {
     this->daysOfCourse[i] = 0;
 }
 
-Student::Student(string ID, string fName, string lName, string eAddress,
-                 string stAge, int daysOfCourse[], Degree degreeType) {
+Student::Student(std::string ID, std::string fName, std::string lName,
+                 std::string eAddress, std::string stAge, int daysOfCourse[],
+                 Degree degreeType) {
   this->studentID = ID;
   this->firstName = fName;
   this->lastName = lName;
@@ -24,34 +26,32 @@ Student::Student(string ID, string fName, string lName, string eAddress,
 }
 
 // SETTERS //
-void Student::setStudentID(string ID) { studentID = ID; }
-void Student::setFirstName(string fName) { firstName = fName; }
-void Student::setLastName(string lName) { lastName = lName; }
-void Student::setEmail(string eAddress) { emailAddress = eAddress; }
-void Student::setAge(string stAge) { age = stAge; }
+void Student::setStudentID(std::string ID) { studentID = ID; }
+void Student::setFirstName(std::string fName) { firstName = fName; }
+void Student::setLastName(std::string lName) { lastName = lName; }
+void Student::setEmail(std::string eAddress) { emailAddress = eAddress; }
+void Student::setAge(std::string stAge) { age = stAge; }
 void Student::setDaysOfCourse(int daysOfCourse[]) {
   for (int i = 0; i < daysArraySize; i++)
     this->daysOfCourse[i] = daysOfCourse[i];
   // 'this' pointer retrieving object in parameters
 }
 // GETTERS //
-string Student::getID() { return studentID; }
-string Student::getFirstName() { return firstName; }
-string Student::getLastName() { return lastName; }
-string Student::getEmail() { return emailAddress; }
-string Student::getAge() { return age; }
+std::string Student::getID() { return studentID; }
+std::string Student::getFirstName() { return firstName; }
+std::string Student::getLastName() { return lastName; }
+std::string Student::getEmail() { return emailAddress; }
+std::string Student::getAge() { return age; }
 int *Student::getCourseDays() { return daysOfCourse; }
 
 void Student::print() {
-  cout << "Student ID: " << studentID << "\t";
-  cout << "First Name: " << firstName << "\t";
-  cout << "Last Name: " << lastName << "\t";
-  cout << "Email Address: " << emailAddress << "\t";
-  cout << "Age: " << age << "\t Days In Course: {";
-  cout << daysOfCourse[0] << ", ";
-  cout << daysOfCourse[1] << ", ";
-  cout << daysOfCourse[2] << "} ";
-  cout << "Degree Program: " << degreeType << "\t";
+  std::cout << "Student ID: " << studentID << "\t"
+            << "First Name: " << firstName << "\t"
+            << "Last Name: " << lastName << "\t"
+            << "Email Address: " << emailAddress << "\t"
+            << "Age: " << age << "\t Days In Course: {" << daysOfCourse[0]
+            << ", " << daysOfCourse[1] << ", " << daysOfCourse[2] << "} "
+            << "Degree Program: " << degreeType << std::endl;
 }
 
 Student::~Student() {

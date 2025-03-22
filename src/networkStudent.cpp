@@ -1,18 +1,24 @@
 #include "networkStudent.h"
+#include <iostream>
 
+// default constructor
 NetworkStudent::NetworkStudent() { setDegreeType(NETWORKING); }
-NetworkStudent::NetworkStudent(string StudentID, string firstName,
-                               string lastName, string emailAddress, string age,
-                               int *daysOfCourses, Degree degreeType) {
+
+// parameterized constructor
+NetworkStudent::NetworkStudent(std::string StudentID, std::string firstName,
+                               std::string lastName, std::string emailAddress,
+                               std::string age, int *daysOfCourses,
+                               Degree degreeType) {
   setDegreeType(NETWORKING);
 }
+
+// overriden methods
 Degree NetworkStudent::getDegreeProgram() { return NETWORKING; }
 void NetworkStudent::setDegreeType(Degree d) { this->degreeType = NETWORKING; }
 void NetworkStudent::print() {
   this->Student::print();
-  cout << "NETWORKING\n";
+  std::cout << "NETWORKING\n";
 }
-NetworkStudent::~NetworkStudent() {
-  Student::~Student();
-  delete this;
-}
+
+// destructor
+NetworkStudent::~NetworkStudent() {}

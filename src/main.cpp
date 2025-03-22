@@ -13,7 +13,7 @@ Roster::Roster(int maxSize) {
   this->index = -1;
   this->classRosterArray = new Student *[maxSize];
 }
-void Roster::parse(string row) {
+void Roster::parse(std::string row) {
   if (index < maxSize) {
     index++; // start at 0
     int tempArrayDays[Student::daysArraySize];
@@ -27,7 +27,7 @@ void Roster::parse(string row) {
       this->classRosterArray[index] = new NetworkStudent();
       classRosterArray[index]->setDegreeType(NETWORKING);
     } else {
-      cerr << "ERROR: STUDENT TYPE BROKEN.\n";
+      std::cerr << "ERROR: STUDENT TYPE BROKEN.\n";
       exit(-1);
     }
 
@@ -74,14 +74,15 @@ void Roster::parse(string row) {
 
     classRosterArray[index]->setDaysOfCourse(tempArrayDays);
   } else {
-    cerr << "ERROR\n";
+    std::cerr << "ERROR\n";
     exit(-1);
   }
 }
 
-void Roster::add(string studentID, string firstName, string lastName,
-                 string emailAddress, string age, int daysOfCourse1,
-                 int daysOfCourse2, int daysOfCourse3, Degree degreeType) {
+void Roster::add(std::string studentID, std::string firstName,
+                 std::string lastName, std::string emailAddress,
+                 std::string age, int daysOfCourse1, int daysOfCourse2,
+                 int daysOfCourse3, Degree degreeType) {
   int studentDaysOfCourse[Student::daysArraySize];
   studentDaysOfCourse[0] = daysOfCourse1;
   studentDaysOfCourse[1] = daysOfCourse2;
@@ -93,7 +94,7 @@ void Roster::printAll() {
     (this->classRosterArray)[i]->print();
 }
 
-bool Roster::remove(string studentID) {
+bool Roster::remove(std::string studentID) {
   bool exists = false;
   for (int i = 0; i <= index; i++) {
     if (this->classRosterArray[i]->getID() == studentID) {
@@ -114,12 +115,13 @@ void Roster::printByDegreeProgram(Degree d) {
   }
 }
 
-void Roster::printDaysInCourse(string studentID) {
+void Roster::printDaysInCourse(std::string studentID) {
   for (int i = 0; i <= index; i++) {
     if (this->classRosterArray[i]->getID() == studentID) {
       int *avgDays = classRosterArray[i]->getCourseDays();
-      cout << "\nAverage days of courses for student " << studentID << " is "
-           << (avgDays[0] + avgDays[1] + avgDays[2]) / 3 << " days." << endl;
+      std::cout << "\nAverage days of courses for student " << studentID
+                << " is " << (avgDays[0] + avgDays[1] + avgDays[2]) / 3
+                << " days." << std::endl;
     } else {
       // cout << "Course not found.\n";
     }
@@ -128,11 +130,11 @@ void Roster::printDaysInCourse(string studentID) {
 
 void Roster::printInvalidEmails() {
   for (int i = 0; i <= index; i++) {
-    string emailCheck = classRosterArray[i]->getEmail();
-    if (emailCheck.find(".") == string::npos ||
-        emailCheck.find("@") == string::npos ||
-        emailCheck.find(" ") != string::npos)
-      cout << emailCheck << " is an invalid email." << endl;
+    std::string emailCheck = classRosterArray[i]->getEmail();
+    if (emailCheck.find(".") == std::string::npos ||
+        emailCheck.find("@") == std::string::npos ||
+        emailCheck.find(" ") != std::string::npos)
+      std::cout << emailCheck << " is an invalid email." << std::endl;
   }
 }
 
@@ -146,39 +148,39 @@ Roster::~Roster() {
 auto main() -> int {
   Roster *classRoster = new Roster(numStudents);
 
-  cout << "\nParsing data and adding students:\n";
+  std::cout << "\nParsing data and adding students:\n";
 
 #pragma unroll
   for (int i = 0; i < numStudents; i++) {
     classRoster->parse(studentData[i]);
   }
 
-  cout << "\nData parsed.\n";
+  std::cout << "\nData parsed.\n";
 
-  cout << "\nPrinting all students.\n" << endl;
+  std::cout << "\nPrinting all students.\n" << std::endl;
   classRoster->printAll();
 
-  cout << "\nPrinting invalid student emails:\n" << endl;
+  std::cout << "\nPrinting invalid student emails:\n" << std::endl;
   classRoster->printInvalidEmails();
 
-  cout << "\nPrinting average days in course for student A2:\n";
+  std::cout << "\nPrinting average days in course for student A2:\n";
   classRoster->printDaysInCourse("A2");
 
-  cout << "\nPrinting students in the Software Program.\n" << endl;
+  std::cout << "\nPrinting students in the Software Program.\n" << std::endl;
   classRoster->printByDegreeProgram(SOFTWARE);
 
-  cout << "\nRemoving student A3:\n\n";
+  std::cout << "\nRemoving student A3:\n\n";
   if (classRoster->remove("A3")) {
     classRoster->printAll();
   } else {
-    cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
+    std::cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
   }
 
-  cout << "\nRemoving student A3:\n\n";
+  std::cout << "\nRemoving student A3:\n\n";
   if (classRoster->remove("A3")) {
     classRoster->printAll();
   } else {
-    cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
+    std::cout << "ERROR: COULD NOT REMOVE, STUDENT NOT FOUND.\n";
   }
 
   return 0;

@@ -3,13 +3,16 @@
 
 class SoftwareStudent : public Student {
 public:
+  // constructor
   SoftwareStudent();
-  SoftwareStudent(string StudentID, string firstName, string lastName,
-                  string emailAddress, string age, int *daysOfCourse,
-                  Degree dType);
+  // parameterized constructor
+  SoftwareStudent(std::string StudentID, std::string firstName,
+                  std::string lastName, std::string emailAddress,
+                  std::string age, int *daysOfCourse, Degree dType);
   Degree getDegreeProgram();
   void setDegreeType(Degree d);
   void print();
 
-  ~SoftwareStudent(); // call superdestructor
+  // destructor
+  ~SoftwareStudent();
 };
