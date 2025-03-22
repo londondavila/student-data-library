@@ -1,29 +1,20 @@
-#include <iostream>
 #include "securityStudent.h"
+#include <iostream>
 
-SecurityStudent::SecurityStudent()
-{
-	setDegreeType(SECURITY);
+SecurityStudent::SecurityStudent() { setDegreeType(SECURITY); }
+SecurityStudent::SecurityStudent(string StudentID, string firstName,
+                                 string lastName, string emailAddress,
+                                 string age, int *daysOfCourses,
+                                 Degree degreeType) {
+  setDegreeType(SECURITY);
 }
-SecurityStudent::SecurityStudent(string StudentID, string firstName, string lastName, string emailAddress, string age, int* daysOfCourses, Degree degreeType)
-{
-	setDegreeType(SECURITY);
+Degree SecurityStudent::getDegreeProgram() { return SECURITY; }
+void SecurityStudent::setDegreeType(Degree d) { this->degreeType = SECURITY; }
+void SecurityStudent::print() {
+  this->Student::print();
+  cout << "SECURITY\n";
 }
-Degree SecurityStudent::getDegreeProgram()
-{
-	return SECURITY;
-}
-void SecurityStudent::setDegreeType(Degree d)
-{
-	this->degreeType = SECURITY;
-}
-void SecurityStudent::print()
-{
-	this->Student::print();
-	cout << "SECURITY\n";
-}
-SecurityStudent::~SecurityStudent()
-{
-	Student::~Student();
-	delete this;
+SecurityStudent::~SecurityStudent() {
+  Student::~Student();
+  delete this;
 }
