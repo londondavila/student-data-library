@@ -25,8 +25,8 @@ set(SOURCES
 )
 
 set(HEADERS
-    ${HEADER_DIRS}/roster.h
     ${HEADER_DIRS}/student.h
+    ${HEADER_DIRS}/roster.h
     ${HEADER_DIRS}/softwareStudent.h
     ${HEADER_DIRS}/securityStudent.h
     ${HEADER_DIRS}/networkStudent.h

@@ -3,7 +3,7 @@
 
 const int numStudents = 5;
 
-const string studentData[numStudents] = {
+const std::string studentData[numStudents] = {
     "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
     "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORKING",
     "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
@@ -15,14 +15,14 @@ public:
   Roster();
   Roster(int maxSize);
 
-  void parse(string row);
-  void add(string studentID, string firstName, string lastName,
-           string emailAddress, string age, int daysInCourse1,
+  void parse(std::string row);
+  void add(std::string studentID, std::string firstName, std::string lastName,
+           std::string emailAddress, std::string age, int daysInCourse1,
            int daysInCourse2, int daysInCourse3, Degree degreeType);
-  bool remove(string studentID);
+  bool remove(std::string studentID);
   void printAll();
   void printInvalidEmails();
-  void printDaysInCourse(string studentID);
+  void printDaysInCourse(std::string studentID);
   void printByDegreeProgram(Degree d);
 
   ~Roster();

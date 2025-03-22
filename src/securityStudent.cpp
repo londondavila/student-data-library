@@ -1,20 +1,24 @@
 #include "securityStudent.h"
 #include <iostream>
 
+// default constructor
 SecurityStudent::SecurityStudent() { setDegreeType(SECURITY); }
-SecurityStudent::SecurityStudent(string StudentID, string firstName,
-                                 string lastName, string emailAddress,
-                                 string age, int *daysOfCourses,
+
+// parameterized constructor
+SecurityStudent::SecurityStudent(std::string StudentID, std::string firstName,
+                                 std::string lastName, std::string emailAddress,
+                                 std::string age, int *daysOfCourses,
                                  Degree degreeType) {
   setDegreeType(SECURITY);
 }
+
+// overriden methods
 Degree SecurityStudent::getDegreeProgram() { return SECURITY; }
 void SecurityStudent::setDegreeType(Degree d) { this->degreeType = SECURITY; }
 void SecurityStudent::print() {
   this->Student::print();
-  cout << "SECURITY\n";
+  std::cout << "SECURITY\n";
 }
-SecurityStudent::~SecurityStudent() {
-  Student::~Student();
-  delete this;
-}
+
+// superdestructor
+SecurityStudent::~SecurityStudent() {}

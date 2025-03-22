@@ -3,3 +3,21 @@ repos:
     rev: v20.1.0
     hooks:
       - id: clang-format
+
+  #  TODO: Add clang-tidy hook
+  # - repo: https://github.com/pocc/pre-commit-hooks
+  #   rev: v1.3.5
+  #   hooks:
+  #     - id: clang-tidy
+  #       entry: bash -c 'find src include -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build'
+  #       # args: 
+  #       #   - --checks=*
+  #       #   - --use-color
+  #       #   - fix-errors
+  #       #   - -p
+  #       #   - build
+  #       language: system
+  #       files: ^(include/|src/)
+  #       # exclude: ^(tests/|venv/|site-packages/)
+  #     - id: cppcheck
+  #     # - id: cpplint
