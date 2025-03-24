@@ -7,32 +7,39 @@ class Student {
 public:
   // constructor
   Student();
+
   // parameterized constructor
-  Student(std::string ID, std::string fName, std::string lName,
-          std::string eAddress, std::string stAge, int daysOfCourse[],
-          Degree degreeType);
+  Student(const std::string &ID, const std::string &fName,
+          const std::string &lName, const std::string &eAddress,
+          const std::string &stAge, int daysOfCourse[], Degree degreeType);
+
+  // copy constructor
+  Student(const Student &other);
+
+  // copy assignment operator
+  Student &operator=(const Student &other);
 
   // destructor
   ~Student();
 
-  const static int daysArraySize = 3; // number of days to complete courses
-
   // setters
-  void setStudentID(std::string ID);
-  void setFirstName(std::string fName);
-  void setLastName(std::string lName);
-  void setEmail(std::string eAddress);
-  void setAge(std::string stAge);
+  void setStudentID(const std::string &ID);
+  void setFirstName(const std::string &fName);
+  void setLastName(const std::string &lName);
+  void setEmail(const std::string &eAddress);
+  void setAge(const std::string &stAge);
   void setDaysOfCourse(int days[]);
-  virtual void setDegreeType(Degree d) = 0;
+  virtual void setDegreeType(Degree degreeType) = 0;
 
   // getters
-  std::string getID();
-  std::string getFirstName();
-  std::string getLastName();
-  std::string getEmail();
-  std::string getAge();
-  int *getCourseDays();
+  const std::string &getID() { return studentID; }
+  const std::string &getFirstName() { return firstName; }
+  const std::string &getLastName() { return lastName; }
+  const std::string &getEmail() { return emailAddress; }
+  const std::string &getAge() { return age; }
+  int *getCourseDays() { return daysOfCourse; }
+  const static int getDefaultDaysArraySize() { return defaultDaysArraySize; }
+  Degree getDegreeType() { return degreeType; }
 
   // virtual functions
   virtual void print() = 0;
@@ -45,5 +52,6 @@ protected:
   std::string emailAddress;
   std::string age;
   int *daysOfCourse;
-  Degree degreeType; // The enumerated value
+  const static int defaultDaysArraySize = 3;
+  Degree degreeType; // enumerated value
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include "student.h"
+#include <string>
 
 const int numStudents = 5;
 
@@ -13,23 +14,32 @@ const std::string studentData[numStudents] = {
 class Roster {
 public:
   Roster();
-  Roster(int maxSize);
+  explicit Roster(int maxSize);
 
-  void parse(std::string row);
-  void add(std::string studentID, std::string firstName, std::string lastName,
-           std::string emailAddress, std::string age, int daysInCourse1,
-           int daysInCourse2, int daysInCourse3, Degree degreeType);
-  bool remove(std::string studentID);
+  // copy constructor
+  Roster(const Roster &other);
+
+  // assignment operator
+  Roster &operator=(const Roster &other);
+
+  void parse(const std::string &row);
+  void add(const std::string &studentID, const std::string &firstName,
+           const std::string &lastName, const std::string &emailAddress,
+           const std::string &age, int daysInCourse1, int daysInCourse2,
+           int daysInCourse3, Degree degreeType);
+  bool remove(const std::string &studentID);
   void printAll();
   void printInvalidEmails();
-  void printDaysInCourse(std::string studentID);
+  void printDaysInCourse(const std::string &studentID);
   void printByDegreeProgram(Degree d);
 
   ~Roster();
 
 private:
-  int index;
-  Student *
-      *classRosterArray; // originally Student** classRosterArray for dynamic
-  int maxSize;           // ONLY NEEDED FOR DYNAMIC ALLOCATION
+  // dynamically allocated array
+  Student **classRosterArray = nullptr;
+  // iteration or tracking index
+  int index = 0;
+  // default size, can be set dynamically
+  int maxSize = numStudents;
 };
