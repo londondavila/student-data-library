@@ -1,47 +1,40 @@
 #include "student.h"
+#include <algorithm>
 #include <iostream>
 
-Student::Student() {
-  this->studentID = "";
-  this->firstName = "";
-  this->lastName = "";
-  this->emailAddress = "";
-  this->age = "";
-  this->daysOfCourse = new int[daysArraySize];
-  for (int i = 0; i < daysArraySize; i++)
-    this->daysOfCourse[i] = 0;
+// default constructor
+Student::Student()
+    : studentID(""), firstName(""), lastName(""), emailAddress(""), age(""),
+      degreeType(Degree::SOFTWARE), // placeholder
+      daysOfCourse(new int[daysArraySize]{0}) {}
+
+// parameterized constructor
+Student::Student(const std::string &ID, const std::string &fName,
+                 const std::string &lName, const std::string &eAddress,
+                 const std::string &stAge, int daysOfCourse[],
+                 Degree degreeType)
+    : studentID(ID), firstName(fName), lastName(lName), emailAddress(eAddress),
+      age(stAge), degreeType(degreeType), daysOfCourse(new int[daysArraySize]) {
+  std::copy(daysOfCourse, daysOfCourse + daysArraySize, this->daysOfCourse);
 }
 
-Student::Student(std::string ID, std::string fName, std::string lName,
-                 std::string eAddress, std::string stAge, int daysOfCourse[],
-                 Degree degreeType) {
-  this->studentID = ID;
-  this->firstName = fName;
-  this->lastName = lName;
-  this->emailAddress = eAddress;
-  this->age = stAge;
-  this->daysOfCourse = new int[daysArraySize];
-  for (int i = 0; i < daysArraySize; i++)
-    this->daysOfCourse[i] = daysOfCourse[i];
-}
-
-// SETTERS //
-void Student::setStudentID(std::string ID) { studentID = ID; }
-void Student::setFirstName(std::string fName) { firstName = fName; }
-void Student::setLastName(std::string lName) { lastName = lName; }
-void Student::setEmail(std::string eAddress) { emailAddress = eAddress; }
-void Student::setAge(std::string stAge) { age = stAge; }
+// setters
+void Student::setStudentID(const std::string &ID) { studentID = ID; }
+void Student::setFirstName(const std::string &fName) { firstName = fName; }
+void Student::setLastName(const std::string &lName) { lastName = lName; }
+void Student::setEmail(const std::string &eAddress) { emailAddress = eAddress; }
+void Student::setAge(const std::string &stAge) { age = stAge; }
 void Student::setDaysOfCourse(int daysOfCourse[]) {
-  for (int i = 0; i < daysArraySize; i++)
-    this->daysOfCourse[i] = daysOfCourse[i];
   // 'this' pointer retrieving object in parameters
+  std::copy(daysOfCourse, daysOfCourse + daysArraySize, this->daysOfCourse);
 }
-// GETTERS //
-std::string Student::getID() { return studentID; }
-std::string Student::getFirstName() { return firstName; }
-std::string Student::getLastName() { return lastName; }
-std::string Student::getEmail() { return emailAddress; }
-std::string Student::getAge() { return age; }
+
+// getters
+const std::string &Student::getID() { return studentID; }
+const std::string &Student::getFirstName() { return firstName; }
+const std::string &Student::getLastName() { return lastName; }
+const std::string &Student::getEmail() { return emailAddress; }
+const std::string &Student::getAge() { return age; }
 int *Student::getCourseDays() { return daysOfCourse; }
 
 void Student::print() {
@@ -55,8 +48,6 @@ void Student::print() {
 }
 
 Student::~Student() {
-  if (daysOfCourse != nullptr) {
-    delete[] daysOfCourse;
-    daysOfCourse = nullptr;
-  }
+  delete[] daysOfCourse;
+  daysOfCourse = nullptr;
 }

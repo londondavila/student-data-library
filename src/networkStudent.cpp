@@ -2,15 +2,20 @@
 #include <iostream>
 
 // default constructor
-NetworkStudent::NetworkStudent() { setDegreeType(NETWORKING); }
+NetworkStudent::NetworkStudent()
+    : Student("", "", "", "", "",
+              new int[Student::getDefaultDaysArraySize()]{0, 0, 0},
+              NETWORKING) {}
 
 // parameterized constructor
-NetworkStudent::NetworkStudent(std::string StudentID, std::string firstName,
-                               std::string lastName, std::string emailAddress,
-                               std::string age, int *daysOfCourses,
-                               Degree degreeType) {
-  setDegreeType(NETWORKING);
-}
+NetworkStudent::NetworkStudent(const std::string &StudentID,
+                               const std::string &firstName,
+                               const std::string &lastName,
+                               const std::string &emailAddress,
+                               const std::string &age, int *daysOfCourses,
+                               Degree degreeType)
+    : Student(StudentID, firstName, lastName, emailAddress, age, daysOfCourses,
+              NETWORKING) {}
 
 // overriden methods
 Degree NetworkStudent::getDegreeProgram() { return NETWORKING; }

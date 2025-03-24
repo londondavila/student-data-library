@@ -5,9 +5,12 @@ repos:
       - id: clang-format
 
   #  TODO: Add clang-tidy hook
-  # - repo: https://github.com/pocc/pre-commit-hooks
-  #   rev: v1.3.5
-  #   hooks:
+  - repo: https://github.com/pocc/pre-commit-hooks
+    rev: v1.3.5
+    hooks:
+      - id: cppcheck
+        args: [--enable=all, --language=c++, --std=c++11, -Iinclude, -Isrc]
+        files: ^(include/|src/)
   #     - id: clang-tidy
   #       entry: bash -c 'find src include -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build'
   #       # args: 
@@ -19,5 +22,4 @@ repos:
   #       language: system
   #       files: ^(include/|src/)
   #       # exclude: ^(tests/|venv/|site-packages/)
-  #     - id: cppcheck
   #     # - id: cpplint

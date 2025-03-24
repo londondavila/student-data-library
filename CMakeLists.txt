@@ -7,6 +7,7 @@ project(StudentDataLibrary VERSION 1.0)
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -g -fsanitize=address")
 
 # Enable clang-tidy
 # set(CMAKE_CXX_CLANG_TIDY "/opt/homebrew/opt/llvm/bin/clang-tidy;--checks=*")
