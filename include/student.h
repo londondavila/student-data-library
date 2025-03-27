@@ -1,10 +1,11 @@
 #pragma once
-#include "degree.h"
 #include <iostream>
 #include <string>
 
+#include "degree.h"
+
 class Student {
-public:
+ public:
   // constructor
   Student();
 
@@ -45,7 +46,7 @@ public:
   virtual void print() = 0;
   virtual Degree getDegreeProgram() = 0;
 
-protected:
+ protected:
   std::string studentID;
   std::string firstName;
   std::string lastName;
@@ -53,5 +54,5 @@ protected:
   std::string age;
   int *daysOfCourse;
   const static int defaultDaysArraySize = 3;
-  Degree degreeType; // enumerated value
+  Degree degreeType;  // enumerated value
 };

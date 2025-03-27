@@ -1,9 +1,10 @@
 #pragma once
-#include "student.h"
 #include <string>
 
+#include "student.h"
+
 class SoftwareStudent : public Student {
-public:
+ public:
   // constructor
   SoftwareStudent();
   // parameterized constructor
@@ -11,7 +12,7 @@ public:
                   const std::string &lastName, const std::string &emailAddress,
                   const std::string &age, int *daysOfCourse, Degree dType);
   Degree getDegreeProgram() override;
-  void setDegreeType(Degree d) override; // pure virtual function
+  void setDegreeType(Degree d) override;  // pure virtual function
   void print() override;
 
   // destructor

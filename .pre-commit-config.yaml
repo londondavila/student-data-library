@@ -5,7 +5,7 @@ repos:
       - id: clang-format
         types_or: [c++]
         args: 
-          # - --style=Google
+          - --style=Google
           - -sort-includes
 
   #  TODO: Add clang-tidy hook

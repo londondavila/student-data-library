@@ -1,11 +1,16 @@
 #include "student.h"
+
 #include <algorithm>
 #include <iostream>
 
 // default constructor
 Student::Student()
-    : studentID(""), firstName(""), lastName(""), emailAddress(""), age(""),
-      degreeType(Degree::SOFTWARE), // placeholder
+    : studentID(""),
+      firstName(""),
+      lastName(""),
+      emailAddress(""),
+      age(""),
+      degreeType(Degree::SOFTWARE),  // placeholder
       daysOfCourse(new int[daysArraySize]{0}) {}
 
 // parameterized constructor
@@ -13,8 +18,13 @@ Student::Student(const std::string &ID, const std::string &fName,
                  const std::string &lName, const std::string &eAddress,
                  const std::string &stAge, int daysOfCourse[],
                  Degree degreeType)
-    : studentID(ID), firstName(fName), lastName(lName), emailAddress(eAddress),
-      age(stAge), degreeType(degreeType), daysOfCourse(new int[daysArraySize]) {
+    : studentID(ID),
+      firstName(fName),
+      lastName(lName),
+      emailAddress(eAddress),
+      age(stAge),
+      degreeType(degreeType),
+      daysOfCourse(new int[daysArraySize]) {
   std::copy(daysOfCourse, daysOfCourse + daysArraySize, this->daysOfCourse);
 }
 

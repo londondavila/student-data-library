@@ -1,12 +1,13 @@
+#include <string>
+
 #include "networkStudent.h"
 #include "roster.h"
 #include "securityStudent.h"
 #include "softwareStudent.h"
-#include <string>
 
 Roster::Roster() {
   this->maxSize = 0;
-  this->index = -1; // setting to empty
+  this->index = -1;  // setting to empty
   this->classRosterArray = nullptr;
 }
 
@@ -18,7 +19,8 @@ Roster::Roster(int maxSize) {
 
 // copy constructor
 Roster::Roster(const Roster &other)
-    : index(other.index), maxSize(other.maxSize),
+    : index(other.index),
+      maxSize(other.maxSize),
       classRosterArray(new Student *[other.maxSize]) {
   for (int i = 0; i <= other.index; ++i) {
     // perform shallow copy of pointers
@@ -28,7 +30,7 @@ Roster::Roster(const Roster &other)
 
 // copy assignment operator
 Roster &Roster::operator=(const Roster &other) {
-  if (this == &other) { // self-assignment check
+  if (this == &other) {  // self-assignment check
     return *this;
   }
 
@@ -43,7 +45,7 @@ Roster &Roster::operator=(const Roster &other) {
   this->maxSize = other.maxSize;
   this->classRosterArray = new Student *[other.maxSize];
   for (int i = 0; i <= other.index; ++i) {
-    this->classRosterArray[i] = other.classRosterArray[i]; // Shallow copy
+    this->classRosterArray[i] = other.classRosterArray[i];  // Shallow copy
   }
 
   return *this;
@@ -55,7 +57,7 @@ void Roster::parse(const std::string &row) {
             << std::endl;
 
   if (index < maxSize) {
-    index++; // start at 0
+    index++;  // start at 0
     int tempArrayDays[Student::getDefaultDaysArraySize()];
     if (row.back() == 'E') {
       this->classRosterArray[index] = new SoftwareStudent();
@@ -130,30 +132,30 @@ void Roster::add(const std::string &studentID, const std::string &firstName,
     index++;
 
     switch (degreeType) {
-    case SOFTWARE:
-      classRosterArray[index] =
-          new SoftwareStudent(studentID, firstName, lastName, emailAddress, age,
-                              new int[Student::getDefaultDaysArraySize()]{
-                                  daysOfCourse1, daysOfCourse2, daysOfCourse3},
-                              degreeType);
-      break;
-    case SECURITY:
-      classRosterArray[index] =
-          new SecurityStudent(studentID, firstName, lastName, emailAddress, age,
-                              new int[Student::getDefaultDaysArraySize()]{
-                                  daysOfCourse1, daysOfCourse2, daysOfCourse3},
-                              degreeType);
-      break;
-    case NETWORKING:
-      classRosterArray[index] =
-          new NetworkStudent(studentID, firstName, lastName, emailAddress, age,
-                             new int[Student::getDefaultDaysArraySize()]{
-                                 daysOfCourse1, daysOfCourse2, daysOfCourse3},
-                             degreeType);
-      break;
-    default:
-      std::cerr << "ERROR: Invalid degree type." << std::endl;
-      exit(-1);
+      case SOFTWARE:
+        classRosterArray[index] = new SoftwareStudent(
+            studentID, firstName, lastName, emailAddress, age,
+            new int[Student::getDefaultDaysArraySize()]{
+                daysOfCourse1, daysOfCourse2, daysOfCourse3},
+            degreeType);
+        break;
+      case SECURITY:
+        classRosterArray[index] = new SecurityStudent(
+            studentID, firstName, lastName, emailAddress, age,
+            new int[Student::getDefaultDaysArraySize()]{
+                daysOfCourse1, daysOfCourse2, daysOfCourse3},
+            degreeType);
+        break;
+      case NETWORKING:
+        classRosterArray[index] = new NetworkStudent(
+            studentID, firstName, lastName, emailAddress, age,
+            new int[Student::getDefaultDaysArraySize()]{
+                daysOfCourse1, daysOfCourse2, daysOfCourse3},
+            degreeType);
+        break;
+      default:
+        std::cerr << "ERROR: Invalid degree type." << std::endl;
+        exit(-1);
     }
   } else {
     std::cerr << "ERROR: Roster is full." << std::endl;
@@ -161,8 +163,7 @@ void Roster::add(const std::string &studentID, const std::string &firstName,
 }
 
 void Roster::printAll() {
-  for (int i = 0; i <= this->index; i++)
-    (this->classRosterArray)[i]->print();
+  for (int i = 0; i <= this->index; i++) (this->classRosterArray)[i]->print();
 }
 
 bool Roster::remove(const std::string &studentID) {
