@@ -4,9 +4,7 @@ repos:
     hooks:
       - id: clang-format
         types_or: [c++]
-        args: 
-          - --style=Google
-          - -sort-includes
+        args: [--style=Google, -sort-includes]
 
   #  TODO: Add clang-tidy hook
   - repo: https://github.com/pocc/pre-commit-hooks

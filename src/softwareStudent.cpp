@@ -20,7 +20,6 @@ SoftwareStudent::SoftwareStudent(const std::string &StudentID,
 
 // overriden methods
 Degree SoftwareStudent::getDegreeProgram() { return SOFTWARE; }
-void SoftwareStudent::setDegreeType(Degree d) { this->degreeType = SOFTWARE; }
 void SoftwareStudent::print() {
   this->Student::print();
   std::cout << "SOFTWARE\n";

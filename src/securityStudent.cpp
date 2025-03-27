@@ -20,7 +20,6 @@ SecurityStudent::SecurityStudent(const std::string &StudentID,
 
 // overriden methods
 Degree SecurityStudent::getDegreeProgram() { return SECURITY; }
-void SecurityStudent::setDegreeType(Degree d) { this->degreeType = SECURITY; }
 void SecurityStudent::print() {
   this->Student::print();
   std::cout << "SECURITY" << std::endl;

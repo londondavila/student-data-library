@@ -10,9 +10,8 @@ class SecurityStudent : public Student {
   // parameterized constructor
   SecurityStudent(const std::string &StudentID, const std::string &firstName,
                   const std::string &lastName, const std::string &emailAddress,
-                  const std::string &age, int *daysOfCourse, Degree dType);
+                  const std::string &age, int *daysOfCourse, Degree degreeType);
   Degree getDegreeProgram() override;
-  void setDegreeType(Degree d) override;  // pure virtual function
   void print() override;
 
   // superdestructor

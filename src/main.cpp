@@ -11,6 +11,7 @@ Roster::Roster() {
   this->classRosterArray = nullptr;
 }
 
+// parameterized constructor
 Roster::Roster(int maxSize) {
   this->maxSize = maxSize;
   this->index = -1;
@@ -19,8 +20,8 @@ Roster::Roster(int maxSize) {
 
 // copy constructor
 Roster::Roster(const Roster &other)
-    : index(other.index),
-      maxSize(other.maxSize),
+    : maxSize(other.maxSize),
+      index(other.index),
       classRosterArray(new Student *[other.maxSize]) {
   for (int i = 0; i <= other.index; ++i) {
     // perform shallow copy of pointers
@@ -35,9 +36,6 @@ Roster &Roster::operator=(const Roster &other) {
   }
 
   // cleanup current resources
-  for (int i = 0; i <= index; ++i) {
-    delete this->classRosterArray[i];
-  }
   delete[] this->classRosterArray;
 
   // deep copy resources from "other"
@@ -61,13 +59,10 @@ void Roster::parse(const std::string &row) {
     int tempArrayDays[Student::getDefaultDaysArraySize()];
     if (row.back() == 'E') {
       this->classRosterArray[index] = new SoftwareStudent();
-      classRosterArray[index]->setDegreeType(SOFTWARE);
     } else if (row.back() == 'Y') {
       this->classRosterArray[index] = new SecurityStudent();
-      classRosterArray[index]->setDegreeType(SECURITY);
     } else if (row.back() == 'G') {
       this->classRosterArray[index] = new NetworkStudent();
-      classRosterArray[index]->setDegreeType(NETWORKING);
     } else {
       std::cerr << "ERROR: STUDENT TYPE BROKEN.\n";
       exit(-1);
@@ -171,7 +166,7 @@ bool Roster::remove(const std::string &studentID) {
   for (int i = 0; i <= index; i++) {
     if (this->classRosterArray[i]->getID() == studentID) {
       exists = true;
-      delete this->classRosterArray[i];
+      // delete this->classRosterArray[i];
       this->classRosterArray[i] = this->classRosterArray[index];
       index--;
     }
@@ -211,10 +206,6 @@ void Roster::printInvalidEmails() {
 }
 
 Roster::~Roster() {
-  for (int i = 0; i < numStudents; i++) {
-    // delete each student
-    delete classRosterArray[i];
-  }
   // delete array itself
   delete[] classRosterArray;
 }

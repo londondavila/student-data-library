@@ -37,10 +37,7 @@ class Roster {
   ~Roster();
 
  private:
-  // dynamically allocated array
-  Student **classRosterArray = nullptr;
-  // iteration or tracking index
-  int index = 0;
-  // default size, can be set dynamically
-  int maxSize = numStudents;
+  int maxSize = numStudents;             // default size, can be set dynamically
+  int index = 0;                         // iteration or tracking index
+  Student **classRosterArray = nullptr;  // dynamically allocated array
 };

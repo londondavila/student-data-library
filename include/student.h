@@ -30,7 +30,6 @@ class Student {
   void setEmail(const std::string &eAddress);
   void setAge(const std::string &stAge);
   void setDaysOfCourse(int days[]);
-  virtual void setDegreeType(Degree degreeType) = 0;
 
   // getters
   const std::string &getID() { return studentID; }

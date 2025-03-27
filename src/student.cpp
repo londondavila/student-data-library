@@ -10,8 +10,8 @@ Student::Student()
       lastName(""),
       emailAddress(""),
       age(""),
-      degreeType(Degree::SOFTWARE),  // placeholder
-      daysOfCourse(new int[daysArraySize]{0}) {}
+      degreeType(Degree::UNDEFINED),  // placeholder
+      daysOfCourse(new int[Student::getDefaultDaysArraySize()]{0}) {}
 
 // parameterized constructor
 Student::Student(const std::string &ID, const std::string &fName,
@@ -24,8 +24,9 @@ Student::Student(const std::string &ID, const std::string &fName,
       emailAddress(eAddress),
       age(stAge),
       degreeType(degreeType),
-      daysOfCourse(new int[daysArraySize]) {
-  std::copy(daysOfCourse, daysOfCourse + daysArraySize, this->daysOfCourse);
+      daysOfCourse(new int[Student::getDefaultDaysArraySize()]) {
+  std::copy(daysOfCourse, daysOfCourse + Student::getDefaultDaysArraySize(),
+            this->daysOfCourse);
 }
 
 // setters
@@ -36,16 +37,9 @@ void Student::setEmail(const std::string &eAddress) { emailAddress = eAddress; }
 void Student::setAge(const std::string &stAge) { age = stAge; }
 void Student::setDaysOfCourse(int daysOfCourse[]) {
   // 'this' pointer retrieving object in parameters
-  std::copy(daysOfCourse, daysOfCourse + daysArraySize, this->daysOfCourse);
+  std::copy(daysOfCourse, daysOfCourse + Student::getDefaultDaysArraySize(),
+            this->daysOfCourse);
 }
-
-// getters
-const std::string &Student::getID() { return studentID; }
-const std::string &Student::getFirstName() { return firstName; }
-const std::string &Student::getLastName() { return lastName; }
-const std::string &Student::getEmail() { return emailAddress; }
-const std::string &Student::getAge() { return age; }
-int *Student::getCourseDays() { return daysOfCourse; }
 
 void Student::print() {
   std::cout << "Student ID: " << studentID << "\t"
