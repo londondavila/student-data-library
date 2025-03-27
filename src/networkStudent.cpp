@@ -1,5 +1,6 @@
 #include "networkStudent.h"
 #include <iostream>
+#include <string>
 
 // default constructor
 NetworkStudent::NetworkStudent()

@@ -2,6 +2,7 @@
 #include "roster.h"
 #include "securityStudent.h"
 #include "softwareStudent.h"
+#include <string>
 
 Roster::Roster() {
   this->maxSize = 0;

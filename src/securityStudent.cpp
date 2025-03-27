@@ -1,5 +1,6 @@
 #include "securityStudent.h"
 #include <iostream>
+#include <string>
 
 // default constructor - initialize with empty strings
 SecurityStudent::SecurityStudent()
