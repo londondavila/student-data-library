@@ -21,6 +21,7 @@ NetworkStudent::NetworkStudent(const std::string &StudentID,
 
 // overriden methods
 Degree NetworkStudent::getDegreeProgram() { return NETWORKING; }
+void NetworkStudent::setDegreeType(Degree dType) { this->_degreeType = dType; }
 void NetworkStudent::print() {
   this->Student::print();
   std::cout << "NETWORKING" << std::endl;

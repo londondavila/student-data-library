@@ -59,10 +59,13 @@ void Roster::parse(const std::string &row) {
     int tempArrayDays[Student::getDefaultDaysArraySize()];
     if (row.back() == 'E') {
       this->classRosterArray[index] = new SoftwareStudent();
+      classRosterArray[index]->setDegreeType(SOFTWARE);
     } else if (row.back() == 'Y') {
       this->classRosterArray[index] = new SecurityStudent();
+      classRosterArray[index]->setDegreeType(SECURITY);
     } else if (row.back() == 'G') {
       this->classRosterArray[index] = new NetworkStudent();
+      classRosterArray[index]->setDegreeType(NETWORKING);
     } else {
       std::cerr << "ERROR: STUDENT TYPE BROKEN.\n";
       exit(-1);
@@ -120,9 +123,6 @@ void Roster::add(const std::string &studentID, const std::string &firstName,
                  const std::string &lastName, const std::string &emailAddress,
                  const std::string &age, int daysOfCourse1, int daysOfCourse2,
                  int daysOfCourse3, Degree degreeType) {
-  // std::array<int, Student::daysArraySize> studentDaysOfCourse =
-  // {daysOfCourse1, daysOfCourse2, daysOfCourse3};
-
   if (index < maxSize) {
     index++;
 
@@ -166,7 +166,6 @@ bool Roster::remove(const std::string &studentID) {
   for (int i = 0; i <= index; i++) {
     if (this->classRosterArray[i]->getID() == studentID) {
       exists = true;
-      // delete this->classRosterArray[i];
       this->classRosterArray[i] = this->classRosterArray[index];
       index--;
     }
