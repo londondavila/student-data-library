@@ -1,5 +1,6 @@
 #pragma once
 #include "student.h"
+#include <string>
 
 class SecurityStudent : public Student {
 public:

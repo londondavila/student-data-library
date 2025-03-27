@@ -1,5 +1,6 @@
 #include "softwareStudent.h"
 #include <iostream>
+#include <string>
 
 // default constructor
 SoftwareStudent::SoftwareStudent()
