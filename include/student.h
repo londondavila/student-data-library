@@ -4,6 +4,8 @@
 
 #include "degree.h"
 
+const static int DEFAULT_DAYS_ARRAY_SIZE = 3;
+
 class Student {
  public:
   // constructor
@@ -12,7 +14,7 @@ class Student {
   // parameterized constructor
   Student(const std::string &ID, const std::string &fName,
           const std::string &lName, const std::string &eAddress,
-          const std::string &stAge, int daysOfCourse[], Degree dType);
+          const std::string &stAge, Degree degreeType, int daysOfCourse[]);
 
   // copy constructor
   Student(const Student &other);
@@ -38,9 +40,8 @@ class Student {
   const std::string &getLastName() { return _lastName; }
   const std::string &getEmail() { return _emailAddress; }
   const std::string &getAge() { return _age; }
-  int *getCourseDays() { return _daysOfCourse; }
   Degree getDegreeType() { return _degreeType; }
-  const static int getDefaultDaysArraySize() { return _defaultDaysArraySize; }
+  int *getCourseDays() { return _daysOfCourse; }
 
   // virtual functions
   virtual void print() = 0;
@@ -52,7 +53,6 @@ class Student {
   std::string _lastName;
   std::string _emailAddress;
   std::string _age;
+  [[maybe_unused]] Degree _degreeType;  // enumerated value
   int *_daysOfCourse;
-  const static int _defaultDaysArraySize = 3;
-  Degree _degreeType;  // enumerated value
 };

@@ -14,17 +14,18 @@ repos:
         args: [--enable=all, --language=c++, --std=c++11, -Iinclude, -Isrc]
         files: ^(include/|src/)
         
-      # - id: clang-tidy
-      #   entry: bash -c 'find src include -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build'
-      #   # args: 
-      #   #   - --checks=*
-      #   #   - --use-color
-      #   #   - fix-errors
-      #   #   - -p
-      #   #   - build
-      #   language: system
-      #   files: ^(include/|src/)
-      #   # exclude: ^(tests/|venv/|site-packages/)
+      - id: clang-tidy
+        entry: bash -c 'find src include -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build'
+        args: 
+        #   - --checks=*
+          - --use-color
+          - -std=c++17
+        #   - fix-errors
+        #   - -p
+        #   - build
+        language: system
+        files: ^(include/|src/)
+        # exclude: ^(tests/|venv/|site-packages/)
 
   # - repo: https://github.com/cpplint/cpplint
   #   rev: 2.0.0

@@ -56,18 +56,18 @@ void Roster::parse(const std::string &row) {
 
   if (index < maxSize) {
     index++;  // start at 0
-    int tempArrayDays[Student::getDefaultDaysArraySize()];
+    int tempArrayDays[DEFAULT_DAYS_ARRAY_SIZE];
     if (row.back() == 'E') {
       this->classRosterArray[index] = new SoftwareStudent();
-      classRosterArray[index]->setDegreeType(SOFTWARE);
+      // classRosterArray[index]->setDegreeType();
     } else if (row.back() == 'Y') {
       this->classRosterArray[index] = new SecurityStudent();
-      classRosterArray[index]->setDegreeType(SECURITY);
+      // classRosterArray[index]->setDegreeType();
     } else if (row.back() == 'G') {
       this->classRosterArray[index] = new NetworkStudent();
-      classRosterArray[index]->setDegreeType(NETWORKING);
+      // classRosterArray[index]->setDegreeType();
     } else {
-      std::cerr << "ERROR: STUDENT TYPE BROKEN.\n";
+      std::cerr << "ERROR: STUDENT TYPE BROKEN." << std::endl;
       exit(-1);
     }
 
@@ -129,24 +129,21 @@ void Roster::add(const std::string &studentID, const std::string &firstName,
     switch (degreeType) {
       case SOFTWARE:
         classRosterArray[index] = new SoftwareStudent(
-            studentID, firstName, lastName, emailAddress, age,
-            new int[Student::getDefaultDaysArraySize()]{
-                daysOfCourse1, daysOfCourse2, daysOfCourse3},
-            degreeType);
+            studentID, firstName, lastName, emailAddress, age, degreeType,
+            new int[DEFAULT_DAYS_ARRAY_SIZE]{daysOfCourse1, daysOfCourse2,
+                                             daysOfCourse3});
         break;
       case SECURITY:
         classRosterArray[index] = new SecurityStudent(
-            studentID, firstName, lastName, emailAddress, age,
-            new int[Student::getDefaultDaysArraySize()]{
-                daysOfCourse1, daysOfCourse2, daysOfCourse3},
-            degreeType);
+            studentID, firstName, lastName, emailAddress, age, degreeType,
+            new int[DEFAULT_DAYS_ARRAY_SIZE]{daysOfCourse1, daysOfCourse2,
+                                             daysOfCourse3});
         break;
       case NETWORKING:
         classRosterArray[index] = new NetworkStudent(
-            studentID, firstName, lastName, emailAddress, age,
-            new int[Student::getDefaultDaysArraySize()]{
-                daysOfCourse1, daysOfCourse2, daysOfCourse3},
-            degreeType);
+            studentID, firstName, lastName, emailAddress, age, degreeType,
+            new int[DEFAULT_DAYS_ARRAY_SIZE]{daysOfCourse1, daysOfCourse2,
+                                             daysOfCourse3});
         break;
       default:
         std::cerr << "ERROR: Invalid degree type." << std::endl;

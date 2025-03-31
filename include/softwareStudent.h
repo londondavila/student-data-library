@@ -10,10 +10,10 @@ class SoftwareStudent : public Student {
   // parameterized constructor
   SoftwareStudent(const std::string &StudentID, const std::string &firstName,
                   const std::string &lastName, const std::string &emailAddress,
-                  const std::string &age, int *daysOfCourse, Degree degreeType);
+                  const std::string &age, Degree degreeType, int *daysOfCourse);
 
-  void setDegreeType(Degree degreeType);
   Degree getDegreeProgram() override;
+  void setDegreeType() override;
   void print() override;
 
   // destructor

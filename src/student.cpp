@@ -10,21 +10,22 @@ Student::Student()
       _lastName(""),
       _emailAddress(""),
       _age(""),
-      _degreeType(Degree::UNDEFINED),  // placeholder
-      _daysOfCourse(new int[Student::getDefaultDaysArraySize()]{0}) {}
+      _degreeType(UNDEFINED),
+      _daysOfCourse(new int[DEFAULT_DAYS_ARRAY_SIZE]{0}) {}
 
 // parameterized constructor
 Student::Student(const std::string &ID, const std::string &fName,
                  const std::string &lName, const std::string &eAddress,
-                 const std::string &stAge, int daysOfCourse[], Degree dType)
+                 const std::string &stAge, Degree degreeType,
+                 int daysOfCourse[])
     : _studentID(ID),
       _firstName(fName),
       _lastName(lName),
       _emailAddress(eAddress),
       _age(stAge),
-      _degreeType(Degree::UNDEFINED),
-      _daysOfCourse(new int[Student::getDefaultDaysArraySize()]) {
-  std::copy(daysOfCourse, daysOfCourse + Student::getDefaultDaysArraySize(),
+      _degreeType(degreeType),
+      _daysOfCourse(new int[DEFAULT_DAYS_ARRAY_SIZE]) {
+  std::copy(daysOfCourse, daysOfCourse + DEFAULT_DAYS_ARRAY_SIZE,
             this->_daysOfCourse);
 }
 
@@ -36,12 +37,12 @@ void Student::setEmail(const std::string &eAddress) {
   _emailAddress = eAddress;
 }
 void Student::setAge(const std::string &stAge) { _age = stAge; }
+void Student::setDegreeType() { _degreeType = UNDEFINED; }
 void Student::setDaysOfCourse(int daysOfCourse[]) {
   // 'this' pointer retrieving object in parameters
-  std::copy(daysOfCourse, daysOfCourse + Student::getDefaultDaysArraySize(),
+  std::copy(daysOfCourse, daysOfCourse + DEFAULT_DAYS_ARRAY_SIZE,
             this->_daysOfCourse);
 }
-void Student::setDegreeType() { _degreeType = UNDEFINED; }
 
 // getter
 void Student::print() {
