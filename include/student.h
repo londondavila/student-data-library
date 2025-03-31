@@ -4,7 +4,7 @@
 
 #include "degree.h"
 
-const static int DEFAULT_DAYS_ARRAY_SIZE = 3;
+static const int DEFAULT_DAYS_ARRAY_SIZE = 3;
 
 class Student {
  public:
