@@ -3,23 +3,27 @@ repos:
     rev: v20.1.0
     hooks:
       - id: clang-format
+        types_or: [c++]
+        args: [--style=Google, -sort-includes]
 
-  #  TODO: Add clang-tidy hook
   - repo: https://github.com/pocc/pre-commit-hooks
     rev: v1.3.5
     hooks:
       - id: cppcheck
         args: [--enable=all, --language=c++, --std=c++11, -Iinclude, -Isrc]
         files: ^(include/|src/)
-  #     - id: clang-tidy
-  #       entry: bash -c 'find src include -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build'
-  #       # args: 
-  #       #   - --checks=*
-  #       #   - --use-color
-  #       #   - fix-errors
-  #       #   - -p
-  #       #   - build
-  #       language: system
-  #       files: ^(include/|src/)
-  #       # exclude: ^(tests/|venv/|site-packages/)
-  #     # - id: cpplint
+        
+      - id: clang-tidy
+        entry: bash -c 'find src include -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build'
+        args:  [--checks=*, -std=c++17, --use-color, fix-errors, -p]
+        language: system
+        files: ^(include/|src/)
+
+  # - repo: https://github.com/cpplint/cpplint
+  #   rev: 2.0.0
+  #   hooks:
+  #     - id: cpplint
+  #       args:
+  #         - --filter=-whitespace/line_length,-whitespace/parens
+  #         - --linelength=120
+  #       # [--extensions=cpp,h, --filter=C, --linelength=120]

@@ -1,6 +1,7 @@
 #pragma once
-#include "student.h"
 #include <string>
+
+#include "student.h"
 
 const int numStudents = 5;
 
@@ -12,7 +13,7 @@ const std::string studentData[numStudents] = {
     "A5,London,Davila,london.davila@gmail.com,21,23,31,33,SOFTWARE"};
 
 class Roster {
-public:
+ public:
   Roster();
   explicit Roster(int maxSize);
 
@@ -35,11 +36,8 @@ public:
 
   ~Roster();
 
-private:
-  // dynamically allocated array
-  Student **classRosterArray = nullptr;
-  // iteration or tracking index
-  int index = 0;
-  // default size, can be set dynamically
-  int maxSize = numStudents;
+ private:
+  int maxSize = numStudents;             // default size, can be set dynamically
+  int index = 0;                         // iteration or tracking index
+  Student **classRosterArray = nullptr;  // dynamically allocated array
 };

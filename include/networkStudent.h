@@ -1,14 +1,17 @@
 #pragma once
+#include <string>
+
 #include "student.h"
 
 class NetworkStudent : public Student {
-public:
+ public:
   NetworkStudent();
   NetworkStudent(const std::string &StudentID, const std::string &firstName,
                  const std::string &lastName, const std::string &emailAddress,
-                 const std::string &age, int *daysOfCourse, Degree dType);
+                 const std::string &age, Degree degreeType, int *daysOfCourse);
+
   Degree getDegreeProgram() override;
-  void setDegreeType(Degree d) override; // pure virtual function
+  void setDegreeType() override;
   void print() override;
 
   // destructor
