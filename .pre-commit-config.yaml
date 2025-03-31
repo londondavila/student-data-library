@@ -6,7 +6,6 @@ repos:
         types_or: [c++]
         args: [--style=Google, -sort-includes]
 
-  #  TODO: Add clang-tidy hook
   - repo: https://github.com/pocc/pre-commit-hooks
     rev: v1.3.5
     hooks:
@@ -16,16 +15,9 @@ repos:
         
       - id: clang-tidy
         entry: bash -c 'find src include -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build'
-        args: 
-        #   - --checks=*
-          - --use-color
-          - -std=c++17
-        #   - fix-errors
-        #   - -p
-        #   - build
+        args:  [--checks=*, -std=c++17, --use-color, fix-errors, -p]
         language: system
         files: ^(include/|src/)
-        # exclude: ^(tests/|venv/|site-packages/)
 
   # - repo: https://github.com/cpplint/cpplint
   #   rev: 2.0.0
