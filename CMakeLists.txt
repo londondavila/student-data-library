@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Project name and version
-project(StudentDataLibrary VERSION 1.0)
+project(StudentDataLibrary VERSION 1.1)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -34,10 +34,6 @@ set(HEADERS
     ${HEADER_DIRS}/networkStudent.h
 )
 
-# Add Google Test
-# find_package(GTest REQUIRED)
-# include_directories(${GTEST_INCLUDE_DIRS})
-
 # Create the static library
 add_library(StudentLibrary STATIC ${SOURCES} ${HEADERS})
 
@@ -50,10 +46,7 @@ target_link_libraries(StudentDataLibrary PRIVATE StudentLibrary)
 # Include the directory for headers
 target_include_directories(StudentLibrary PUBLIC ${HEADER_DIRS})
 
-
-# TESTS
-#
-#
+# <--- TESTS --->
 enable_testing()
 
 # Setup Google Test
@@ -66,11 +59,6 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-# Collect test file(s)
-# set(TESTS
-#     ${TEST_DIRS}/roster_functions_test.cpp
-# )
-
 add_executable(
   test_roster
   ${TEST_DIRS}/roster_functions_test.cpp
@@ -81,9 +69,7 @@ target_link_libraries(
   StudentLibrary
 )
 
-# Link the library to the executable
-# Include the directory for headers
-# target_link_libraries(test_roster PRIVATE StudentLibrary)
+# Include the directory for headers for tests
 target_include_directories(test_roster PUBLIC ${HEADER_DIRS})
 
 include(GoogleTest)
