@@ -15,6 +15,7 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -g -fsanitize=address")
 # Define source directory
 set(SRC_DIR "${CMAKE_SOURCE_DIR}/src")
 set(HEADER_DIRS "${CMAKE_SOURCE_DIR}/include")
+set(TEST_DIRS "${CMAKE_SOURCE_DIR}/tests")
 
 # Collect source files
 set(SOURCES
@@ -33,6 +34,10 @@ set(HEADERS
     ${HEADER_DIRS}/networkStudent.h
 )
 
+# Add Google Test
+# find_package(GTest REQUIRED)
+# include_directories(${GTEST_INCLUDE_DIRS})
+
 # Create the static library
 add_library(StudentLibrary STATIC ${SOURCES} ${HEADERS})
 
@@ -44,3 +49,42 @@ target_link_libraries(StudentDataLibrary PRIVATE StudentLibrary)
 
 # Include the directory for headers
 target_include_directories(StudentLibrary PUBLIC ${HEADER_DIRS})
+
+
+# TESTS
+#
+#
+enable_testing()
+
+# Setup Google Test
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+# Collect test file(s)
+# set(TESTS
+#     ${TEST_DIRS}/roster_functions_test.cpp
+# )
+
+add_executable(
+  test_roster
+  ${TEST_DIRS}/roster_functions_test.cpp
+)
+target_link_libraries(
+  test_roster
+  GTest::gtest_main
+  StudentLibrary
+)
+
+# Link the library to the executable
+# Include the directory for headers
+# target_link_libraries(test_roster PRIVATE StudentLibrary)
+target_include_directories(test_roster PUBLIC ${HEADER_DIRS})
+
+include(GoogleTest)
+gtest_discover_tests(test_roster)

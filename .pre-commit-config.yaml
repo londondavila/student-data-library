@@ -14,7 +14,7 @@ repos:
         files: ^(include/|src/)
         
       - id: clang-tidy
-        entry: bash -c 'find src include -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build'
+        entry: bash -c 'find src include tests -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build'
         args:  [--checks=*, -std=c++17, --use-color, fix-errors, -p]
         language: system
         files: ^(include/|src/)
